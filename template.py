@@ -1,9 +1,8 @@
 
-
 def solution():
 
     with open("input.txt", "r") as file:
-        data = [int(x.replace('\n','')) for x in file.readlines()]
+        data = [x.replace('\n','') for x in file.readlines() if x != ""]
     
 
     return
