@@ -24,7 +24,7 @@ def moveTail(headx, heady, tailx, taily):
 
 def solution():
 
-    with open("day9/input.txt", "r") as file:
+    with open("day09/input.txt", "r") as file:
         data = [x.replace('\n','') for x in file.readlines() if x != ""]
     
     directions = [x.split(" ")[0] for x in data]

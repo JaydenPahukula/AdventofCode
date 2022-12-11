@@ -1,7 +1,7 @@
 
 def solution():
     score = 0
-    with open("day2/input.txt", "r") as file:
+    with open("day02/input.txt", "r") as file:
         data = [x.replace('\n','').split(' ') for x in file.readlines()]
 
     pts = {'X':1,'Y':2,'Z':3}

@@ -31,7 +31,7 @@ def blocking(x, y, data):
 
 def solution():
 
-    with open("day8/input.txt", "r") as file:
+    with open("day08/input.txt", "r") as file:
         data = [[int(x) for x in line.replace('\n','')] for line in file.readlines()]
     
     maks = 0

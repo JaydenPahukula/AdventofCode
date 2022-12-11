@@ -1,7 +1,7 @@
 
 def solution():
 
-    with open("day6/input.txt", "r") as file:
+    with open("day06/input.txt", "r") as file:
         data = [x.replace('\n','') for x in file.readlines() if x != ""][0]
     
     x = list(data[:13])

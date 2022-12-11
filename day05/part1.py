@@ -1,7 +1,7 @@
 
 def solution():
 
-    with open("day5/input.txt", "r") as file:
+    with open("day05/input.txt", "r") as file:
         data = [x.replace('\n','') for x in file.readlines() if x != ""]
     
     stacks = ["RPCDBG", "HVG", "NSQDJPM", "PSLGDCNM", "JBNCPFLS", "QBDZVGTS", "BZMHFTQ", "CMDBF", "FCQG"]

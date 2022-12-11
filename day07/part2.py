@@ -2,7 +2,7 @@
 
 def solution():
 
-    with open("day7/input.txt", "r") as file:
+    with open("day07/input.txt", "r") as file:
         data = [x.replace('\n','') for x in file.readlines()]
 
     dirs = {}

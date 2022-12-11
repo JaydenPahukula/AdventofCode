@@ -1,7 +1,7 @@
 
 def solution():
 
-    with open("day4/input.txt", "r") as file:
+    with open("day04/input.txt", "r") as file:
         data = [x.replace('\n','').split(",") for x in file.readlines() if x != '\n']
     
     score = 0

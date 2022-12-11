@@ -1,7 +1,7 @@
 
 def solution():
 
-    with open("day1/input.txt", "r") as file:
+    with open("day01/input.txt", "r") as file:
         data = [x.replace('\n','') for x in file.readlines()]
     
     elves = []
