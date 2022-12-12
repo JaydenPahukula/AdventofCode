@@ -1,8 +1,15 @@
-#note: I added "cd .." to the end of the input to get back to root
+
 
 def solution():
 
-    with open("day7/input.txt", "r") as file:
+    # with open('day07/test.qzt', 'wb') as f:
+    #     f.seek(1024*1024)
+    #     f.write(b'0')
+
+
+    # return
+
+    with open("day07/input.txt", "r") as file:
         data = [x.replace('\n','') for x in file.readlines()]
 
     dirs = {}
@@ -30,7 +37,6 @@ def solution():
                 currPath.append(currPath[-1]+data[i][5:])
                 if currPath[-1] not in dirs.keys():
                     dirs[currPath[-1]] = []
-                #print("  "*len(currPath), currPath[-1])
         #ls
         elif data[i][2:4] == "ls":
             while (data[i+1][0] != "$"):
@@ -44,6 +50,6 @@ def solution():
             print("invalid input")
             return -1
         i += 1
-        if i >= len(data): return total
+        if i >= len(data): return dirs
 
 print(solution())
