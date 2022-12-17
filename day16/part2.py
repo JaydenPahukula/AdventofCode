@@ -1,66 +1,58 @@
 
-def r(sensor, beacon, row):
-    dy = abs(sensor[0]-row)
-    d = abs(sensor[0]-beacon[0]) + abs(sensor[1]-beacon[1])
-    return range(sensor[1]-(d-dy),sensor[1]+(d-dy))
 
 def solution():
 
-    with open("day15/input.txt", "r") as file:
+    with open("day16/input.txt", "r") as file:
         data = [x.replace('\n','') for x in file.readlines()]
     
-    sensors = {}
-    for line in data:
-        line = line.split(' ')
-        sensors[(int(line[3][2:-1]), int(line[2][2:-1]))] = (int(line[9][2:]), int(line[8][2:-1]))
+    flowrate = {}
+    tunnels = {}
+    id = {}
+    for i, line in enumerate(data):
+        valve = line.split(' ')[1]
+        flowrate[valve] = int(line.split(';')[0][23:])
+        tunnels[valve] = [x[:-1] for x in line.split(' ')[9:-1]]
+        tunnels[valve].append(line.split(' ')[-1])
+        id[valve] = i
+        i += 1
 
-    ranges = [[] for y in range(4000000)]
+    #all valves with flowrate of 0 are considered on
+    start = [-1 for i in range(len(flowrate))]
+    for i in range(len(start)):
+        if flowrate[list(flowrate.keys())[i]] == 0:
+            start[i] = 0
+    
+    #queue
+    paths = [("", "AA", start)]
 
-    for y in range(4000000):
-        for sensor in sensors:
-            beacon = sensors[sensor]
-            ranges[y].append(r(sensor, beacon, y))
+    for min in range(30):
+        print("\nminute", min, "=================================")
+        print(len(paths))
 
-    for y in range(4000000):
-        for x in range(4000000):
-            pass
+        l = len(paths)
+        for i in range(l):
+            #increment queue
+            (path, curr, on), *paths = paths
 
+            #if all valves are on
+            if -1 not in on:
+                paths.append((path, curr, on))
+                print("skipping")
+                continue
+            
+            #turn on valve
+            if on[id[curr]] == -1:
+                newon = on.copy()
+                newon[id[curr]] = min
+                paths.append((path+curr, curr, newon))
+            
+            #travel somewhere
+            for tunnel in tunnels[curr]:
+                paths.append((path+"->", tunnel, on))
+
+        #input()
 
     return
 
+
 print(solution())
-
-
-# def check(point, sensors):
-#     #print(point, "------")
-#     for sensor in sensors:
-#         beacon = sensors[sensor]
-#         d = abs(sensor[0]-beacon[0]) + abs(sensor[1]-beacon[1])
-#         d1 = abs(sensor[0]-point[0]) + abs(sensor[1]-point[1])
-#         #print(d, d1)
-#         if d1 <= d:
-#             return False
-#     return True
-
-# def solution():
-
-#     with open("day15/input.txt", "r") as file:
-#         data = [x.replace('\n','') for x in file.readlines()]
-    
-#     sensors = {}
-#     for line in data:
-#         line = line.split(' ')
-#         sensors[(int(line[3][2:-1]), int(line[2][2:-1]))] = (int(line[9][2:]), int(line[8][2:-1]))
-
-#     grid = [[1 for x in range(4000000)] for y in range(4000000)]
-
-#     for y in range(4000000):
-#         for x in range(4000000):
-#             if check((y, x), sensors):
-#                 grid[y][x] = 0
-#         print(y)
-
-
-#     return
-
-# print(solution())

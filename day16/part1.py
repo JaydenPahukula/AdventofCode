@@ -1,4 +1,8 @@
 
+#============================
+# this is old look at part 2
+#============================
+
 
 def solution():
 
@@ -25,15 +29,19 @@ def solution():
     on = {"":start}
     on[""][0] = True
     paths = [("", "AA", 0)]
-    numDone = 0
+    maxScore = 0
+    numSkips = 0
     for min in range(30):
         print("\nminute", min, "=================================")
-        print(len(paths), numDone)
+        print(len(paths), len(on.keys()), maxScore, numSkips)
         #print(paths)
         l = len(paths)
         for i in range(l):
             (path, curr, score), *paths = paths
             #print("at", path, curr, score, "-------------")
+
+            if score > maxScore:
+                maxScore = score
 
             #add score
             #print(on[path])
@@ -42,25 +50,27 @@ def solution():
                     #print("  +", flowrate[di[i]], "from", di[i])
                     score += flowrate[di[i]]
 
+            if score < 2*maxScore/3:
+                numSkips += 1
+                continue
+
             #print(on[path])
             if False not in on[path]:
-                return
+                paths.append((path, curr, score))
             
             #turn on valve
             if not on[path][id[curr]]:
-                paths.append((path+"()", curr, score))
-                on[path+"()"] = on[path].copy()
-                on[path+"()"][id[curr]] = True
+                paths.append((path+curr, curr, score))
+                on[path+curr] = on[path].copy()
+                on[path+curr][id[curr]] = True
                 #print("opening")
             
             #travel somewhere
-            #else:
             for tunnel in tunnels[curr]:
-                if flowrate[tunnel] > 0:
-                    paths.append((path+"->", tunnel, score))
-                    on[path+"->"] = on[path].copy()
-                    #print("going to", tunnel)
-        
+                paths.append((path+"->", tunnel, score))
+                on[path+"->"] = on[path].copy()
+                #print("going to", tunnel)
+
         #input()
     
     for path in paths:
