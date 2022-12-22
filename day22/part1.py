@@ -43,7 +43,7 @@ def move(grid, distance, x, y, facing):
 def solution():
 
     #read data
-    with open("day21/input.txt", "r") as file:
+    with open("day22/input.txt", "r") as file:
         data = [x for x in file.readlines()]
     
     #build grid from data

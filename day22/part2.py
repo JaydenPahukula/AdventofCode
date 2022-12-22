@@ -143,7 +143,7 @@ def move(cube, distance, x, y, side, facing):
 def solution():
 
     #read data
-    with open("day21/input.txt", "r") as file:
+    with open("day22/input.txt", "r") as file:
         data = [x for x in file.readlines()]
     
     #build cube from data
